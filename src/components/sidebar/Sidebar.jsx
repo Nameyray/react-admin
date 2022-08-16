@@ -12,10 +12,18 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Link } from 'react-router-dom'
+import { useLogout } from "../../hooks/useLogout";
 
 import "./sidebar.scss";
 
 const Sidebar = () => {
+
+  const { logout } = useLogout()
+
+  const handleClick = () => {
+    logout()
+  }
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -33,63 +41,38 @@ const Sidebar = () => {
               <span>Dashboard</span>
             </li>
           </Link>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
             <li>
               <PersonIcon className="icon" />
-              <span>Users</span>
+              <span>Profile</span>
             </li>
           </Link>
-          <p className="title">LIST</p>
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          <Link to="/stacks" style={{ textDecoration: "none" }}>
             <li>
-              <StoreIcon className="icon" />
-              <span>Products</span>
+              <PersonIcon className="icon" />
+              <span>Stacks</span>
             </li>
           </Link>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
-          </li>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-          </li>
-          <p className="title">USEFUL</p>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
-          </li>
-          <li>
-            <NotificationsIcon className="icon" />
-            <span>Notifications</span>
-          </li>
-          <p className="title">SERVICE</p>
-          <li>
-            <SettingsSystemDaydreamIcon className="icon" />
-            <span>System Health</span>
-          </li>
-          <li>
-            <PsychologyIcon className="icon" />
-            <span>Logs</span>
-          </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
-          <p className="title">USER</p>
-          <li>
-            <AccountCircleIcon className="icon" />
-            <span>Profile</span>
-          </li>
-          <li>
+          <Link to="/contacts" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonIcon className="icon" />
+              <span>Contacts</span>
+            </li>
+          </Link>
+          <Link to="/messages" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonIcon className="icon" />
+              <span>Messages</span>
+            </li>
+          </Link>
+          <p className="title">ACTIONS</p>
+          <li
+            onClick={handleClick}
+          >
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
         </ul>
-      </div>
-      <div className="bottom">
-        <div className="colorOptions"></div>
-        <div className="colorOptions"></div>
       </div>
     </div>
   );

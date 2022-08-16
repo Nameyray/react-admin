@@ -8,17 +8,11 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import ListIcon from '@mui/icons-material/List';
 import "./navbar.scss";
-import { useLogout } from "../../hooks/useLogout";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Navbar = () => {
 
-  const { logout } = useLogout()
   const { user } = useAuthContext()
-
-  const handleClick = () => {
-    logout()
-  }
 
   return (
     <div className="navbar">
@@ -34,10 +28,6 @@ const Navbar = () => {
             (
               <div className="item">
                 <span className="userEmail">{user.email}</span>
-                <button
-                  className="logout"
-                  onClick={handleClick}
-                >Logout</button>
               </div>
             )
           }

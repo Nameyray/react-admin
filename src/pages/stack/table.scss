@@ -1,0 +1,42 @@
+.list{
+    display: flex;
+    width: 100%;
+
+    .listContainer{
+        flex: 6;
+        margin-left: 30px;
+        margin-right: 30px;
+
+        .tableList{
+            margin-top: 50px;
+
+            .topContent{
+                display: flex;
+                justify-content: space-between;
+
+                .createButton{
+                    background-color: black;
+                    color: white;
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
+            }
+
+            .editButton{
+                background-color: green;
+                color: white;
+                margin-right: 1px;
+                border: none;
+                cursor: pointer;
+            }
+
+            .deleteButton{
+                background-color: red;
+                color: white;
+                margin-left: 1px;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
