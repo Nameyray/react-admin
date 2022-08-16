@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,27 +12,27 @@ import { Link } from 'react-router-dom';
 import Axios from "axios"
 import { useEffect, useState } from 'react';
 
-const Profile = () => {
+const ProjectList = () => {
 
-  const [profiles, setProfiles] = useState([])
+  const [projects, setProjects] = useState([])
 
-  const getProfiles = () => {
-    Axios.get("/profiles/get-profiles")
+  const getProjects = () => {
+    Axios.get("/projects/get-projects")
       .then(res => {
-        setProfiles(res.data.data.getProfiles)
+        setProjects(res.data.data.getProjects)
       })
   }
 
-  const deleteProfile = (id) => {
-    Axios.delete(`/profiles/delete-profile/${id}`)
+  const deleteProject = (id) => {
+    Axios.delete(`/projects/delete-project/${id}`)
       .then(() => {
         console.log("delete success")
-        getProfiles()
+        getProjects()
       })
   }
 
   useEffect(() => {
-    getProfiles()
+    getProjects()
   }, [])
 
   return (
@@ -43,38 +42,39 @@ const Profile = () => {
         <Navbar />
         <TableContainer component={Paper} className="tableList">
           <div className='topContent'>
-            <h2>Profile</h2>
-            <Link to="/create-profile">
-              <button className='createButton'>Create Profile</button>
+            <h2>Project List</h2>
+            <Link to="/create-project">
+              <button className='createButton'>Create Project</button>
             </Link>
           </div>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>First Name</TableCell>
-                <TableCell align='center'>Last Name</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell align='center'>Image</TableCell>
                 <TableCell align='right'>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {profiles.map((profile, index) => (
+              {projects.map((project, index) => (
                 <TableRow
-                key={index}
+                  key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {profile.first}
+                    {project.name}
                   </TableCell>
-                  <TableCell align='center'>{profile.last}</TableCell>
+                  <TableCell align='center'>{project.image}</TableCell>
                   <TableCell align='right'>
-                    <Link to={`/edit-profile/${profile._id}`}>
+                    <Link to={`/edit-project/${project._id}`}>
                       <button className='editButton'>Edit</button>
                     </Link>
-                    <button onClick={ () => {deleteProfile(profile._id)}}
+                    <button onClick={ () => {deleteProject(project._id)}}
                       className='deleteButton'>Delete</button>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+              }
             </TableBody>
           </Table>
         </TableContainer>
@@ -83,4 +83,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default ProjectList

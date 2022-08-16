@@ -1,9 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import './new.scss'
+import Axios from "axios"
+import { useNavigate, useParams } from 'react-router-dom';
 
-const EditProfile = () => {
+const EditProfile = (props) => {
+
+  const initialState = {
+    name: "",
+    category: "",
+    link: "",
+    description: "",
+    client: ""
+  };
+
+  const { id } = useParams()
+  // const navigate = useNavigate()
+
+  const [file, setFile] = useState("")
+  const [profile, setProfile] = useState(initialState)
+  const [newFirst, setNewFirst] = useState('')
+  const [newMiddle, setNewMiddle] = useState('')
+  const [newLast, setNewLast] = useState('')
+  const [newEmail, setNewEmail] = useState('')
+  const [newLinkedin, setNewLinkedin] = useState('')
+  const [newGithub, setNewGithub] = useState('')
+
+
+  const getProfile = () => {
+    Axios.get(`/profiles/get-profile/${id}`)
+      .then(res => {
+        setProfile(res.data.data.profile)
+      })
+  }
+
+  function handleChange(e) {
+    setProfile({ ...profile, [e.target.name]: e.target.value });
+  }
+
+  const updateProfile = (e) => {
+    e.preventDefault()
+    Axios.put(`/profiles/edit-profile/${profile._id}`, profile)
+      .then(res => {
+        console.log("success")
+      })
+  }
+
+  useEffect(() => {
+    getProfile()
+  }, [props])
+
+
   return (
     <div className='new'>
       <Sidebar />
@@ -14,30 +62,54 @@ const EditProfile = () => {
         </div>
         <div className="bottom">
           <div className="right">
-            <form>
+            <form onSubmit={updateProfile}>
                 <div className="formInput">
                   <label>Input First Name</label>
-                  <input type="text" placeholder="Please input first name" />
+                  <input 
+                  name="first"
+                  onChange={handleChange}
+                  value={profile.first}
+                  type="text" placeholder="Please input first name" />
                 </div>
                 <div className="formInput">
                   <label>Input Middle Name</label>
-                  <input type="text" placeholder="Please input middle name" />
+                  <input 
+                  name="middle"
+                  onChange={handleChange}
+                  value={profile.middle}
+                  type="text" placeholder="Please input middle name" />
                 </div>
                 <div className="formInput">
                   <label>Input Last Name</label>
-                  <input type="text" placeholder="Please input last name" />
+                  <input
+                  name="last"
+                  onChange={handleChange}
+                  value={profile.last} 
+                  type="text" placeholder="Please input last name" />
                 </div>
                 <div className="formInput">
                   <label>Input Email</label>
-                  <input type="email" placeholder="Please input email" />
+                  <input 
+                  name="email"
+                  onChange={handleChange}
+                  value={profile.email}
+                  type="email" placeholder="Please input email" />
                 </div>
                 <div className="formInput">
                   <label>Input Linkedin Link</label>
-                  <input type="text" placeholder="Please input linkedin link" />
+                  <input 
+                  name="linkedin"
+                  onChange={handleChange}
+                  value={profile.linkedin}
+                  type="text" placeholder="Please input linkedin link" />
                 </div>
                 <div className="formInput">
                   <label>Input Github Link</label>
-                  <input type="text" placeholder="Please input github link" />
+                  <input 
+                  name="github"
+                  onChange={handleChange}
+                  value={profile.github}
+                  type="text" placeholder="Please input github link" />
                 </div>
               <button>Update</button>
             </form>

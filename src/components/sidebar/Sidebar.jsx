@@ -53,6 +53,12 @@ const Sidebar = () => {
               <span>Stacks</span>
             </li>
           </Link>
+          <Link to="/projects" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonIcon className="icon" />
+              <span>Projects</span>
+            </li>
+          </Link>
           <Link to="/contacts" style={{ textDecoration: "none" }}>
             <li>
               <PersonIcon className="icon" />

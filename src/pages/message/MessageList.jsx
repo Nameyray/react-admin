@@ -10,12 +10,31 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import './table.scss'
 import { Link } from 'react-router-dom';
+import Axios from "axios"
+import { useEffect, useState } from 'react';
 
 const MessageList = () => {
 
-  const rows = [
-    {name: 'Contact Data', email: 'rupiahjeremiah'},
-  ];
+  const [messages, setMessages] = useState([])
+
+  const getMessages = () => {
+    Axios.get("/messages/get-messages")
+      .then(res => {
+        setMessages(res.data.data.getMessages)
+      })
+  }
+
+  const deleteMessage = (id) => {
+    Axios.delete(`/messages/delete-message/${id}`)
+      .then(() => {
+        console.log("delete success")
+        getMessages()
+      })
+  }
+
+  useEffect(() => {
+    getMessages()
+  }, [])
 
   return (
     <div className='list'>
@@ -24,9 +43,9 @@ const MessageList = () => {
         <Navbar />
         <TableContainer component={Paper} className="tableList">
           <div className='topContent'>
-          <h2>Message List</h2>
-          <Link to="/create-contact">
-          </Link>
+            <h2>Message List</h2>
+            <Link to="/create-contact">
+            </Link>
           </div>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -37,20 +56,21 @@ const MessageList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {messages.map((message, index) => (
                 <TableRow
-                  key={row.name}
+                  key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {message.name}
                   </TableCell>
-                  <TableCell align='center'>{row.email}</TableCell>
+                  <TableCell align='center'>{message.email}</TableCell>
                   <TableCell align='right'>
-                    <Link to="/reply-message">
-                    <button className='editButton'>Reply</button>
+                    <Link to={`/reply-message/${message._id}`}>
+                      <button className='editButton'>Edit</button>
                     </Link>
-                    <button className='deleteButton'>Delete</button>
+                    <button onClick={() => { deleteMessage(message._id) }}
+                      className='deleteButton'>Delete</button>
                   </TableCell>
                 </TableRow>
               ))}
