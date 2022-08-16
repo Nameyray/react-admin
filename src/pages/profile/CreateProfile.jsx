@@ -6,7 +6,6 @@ import Axios from "axios"
 
 const CreateProfile = () => {
 
-  const [file, setFile] = useState("")
   const [first, setFirst] = useState("")
   const [middle, setMiddle] = useState("")
   const [last, setlast] = useState("")
