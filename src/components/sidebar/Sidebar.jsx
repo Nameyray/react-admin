@@ -1,16 +1,7 @@
 import React from "react";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from '@mui/icons-material/Person';
-import StoreIcon from '@mui/icons-material/Store';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
-import PsychologyIcon from '@mui/icons-material/Psychology';
-import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import InsertChartIcon from '@mui/icons-material/InsertChart';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Link } from 'react-router-dom'
 import { useLogout } from "../../hooks/useLogout";
 

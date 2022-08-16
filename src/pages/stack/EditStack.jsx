@@ -4,7 +4,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import './new.scss'
 import Axios from "axios"
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const EditStack = (props) => {
 
@@ -17,15 +17,6 @@ const EditStack = (props) => {
 
   const [file, setFile] = useState("")
   const [stack, setStack] = useState(initialState)
-  const [newName, setNewName] = useState('')
-
-
-  const getStack = () => {
-    Axios.get(`/stacks/get-stack/${id}`)
-      .then(res => {
-        setStack(res.data.data.stack)
-      })
-  }
 
   function handleChange(e) {
 		setStack({ ...stack, [e.target.name]: e.target.value });
@@ -40,8 +31,14 @@ const EditStack = (props) => {
   }
 
   useEffect(() => {
+    const getStack = () => {
+      Axios.get(`/stacks/get-stack/${id}`)
+        .then(res => {
+          setStack(res.data.data.stack)
+        })
+    }
     getStack()
-  }, [props])
+  }, [id])
 
   return (
     <div className='new'>
@@ -54,7 +51,7 @@ const EditStack = (props) => {
         <div className="bottom">
           <div className="left">
             <img
-              src={file ? URL.createObjectURL(file) : 
+              src={file ? URL.createObjectURL(file) :
                 "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
               alt=""
             />
@@ -67,12 +64,12 @@ const EditStack = (props) => {
               </div>
                 <div className="formInput">
                   <label>Input Name</label>
-                  <input 
+                  <input
                     name= "name"
                     onChange={handleChange}
-                    type="text" 
-                    placeholder="Please input name" 
-                    value={stack.name} 
+                    type="text"
+                    placeholder="Please input name"
+                    value={stack.name}
                   />
                 </div>
               <button>Edit</button>

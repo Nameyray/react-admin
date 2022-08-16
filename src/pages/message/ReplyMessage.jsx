@@ -3,7 +3,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import './new.scss'
 import Axios from "axios"
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const ReplyMessage = (props) => {
 
@@ -19,20 +19,19 @@ const ReplyMessage = (props) => {
 
   const [message, setMessage] = useState(initialState)
 
-  const getMessage = () => {
-    Axios.get(`/messages/get-message/${id}`)
-      .then(res => {
-        setMessage(res.data.data.profile)
-      })
-  }
-
   function handleChange(e) {
     setMessage({ ...message, [e.target.name]: e.target.value });
   }
 
   useEffect(() => {
+    const getMessage = () => {
+      Axios.get(`/messages/get-message/${id}`)
+        .then(res => {
+          setMessage(res.data.data.profile)
+        })
+    }
     getMessage()
-  }, [props])
+  }, [id])
 
   return (
     <div className='new'>

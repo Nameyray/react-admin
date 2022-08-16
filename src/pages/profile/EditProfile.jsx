@@ -3,7 +3,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import './new.scss'
 import Axios from "axios"
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const EditProfile = (props) => {
 
@@ -19,22 +19,7 @@ const EditProfile = (props) => {
   const { id } = useParams()
   // const navigate = useNavigate()
 
-  const [file, setFile] = useState("")
   const [profile, setProfile] = useState(initialState)
-  const [newFirst, setNewFirst] = useState('')
-  const [newMiddle, setNewMiddle] = useState('')
-  const [newLast, setNewLast] = useState('')
-  const [newEmail, setNewEmail] = useState('')
-  const [newLinkedin, setNewLinkedin] = useState('')
-  const [newGithub, setNewGithub] = useState('')
-
-
-  const getProfile = () => {
-    Axios.get(`/profiles/get-profile/${id}`)
-      .then(res => {
-        setProfile(res.data.data.profile)
-      })
-  }
 
   function handleChange(e) {
     setProfile({ ...profile, [e.target.name]: e.target.value });
@@ -49,8 +34,14 @@ const EditProfile = (props) => {
   }
 
   useEffect(() => {
+    const getProfile = () => {
+      Axios.get(`/profiles/get-profile/${id}`)
+        .then(res => {
+          setProfile(res.data.data.profile)
+        })
+    }
     getProfile()
-  }, [props])
+  }, [id])
 
 
   return (

@@ -4,7 +4,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import './new.scss'
 import Axios from "axios"
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const EditProject = (props) => {
 
@@ -21,19 +21,6 @@ const EditProject = (props) => {
 
   const [file, setFile] = useState("")
   const [project, setProject] = useState(initialState)
-  const [newName, setNewName] = useState('')
-  const [newCategory, setNewCategory] = useState('')
-  const [newLink, setNewLink] = useState('')
-  const [newDescription, setNewDescription] = useState('')
-  const [newClient, setNewClient] = useState('')
-
-
-  const getProject = () => {
-    Axios.get(`/projects/get-project/${id}`)
-      .then(res => {
-        setProject(res.data.data.project)
-      })
-  }
 
   function handleChange(e) {
     setProject({ ...project, [e.target.name]: e.target.value });
@@ -48,8 +35,14 @@ const EditProject = (props) => {
   }
 
   useEffect(() => {
+    const getProject = () => {
+      Axios.get(`/projects/get-project/${id}`)
+        .then(res => {
+          setProject(res.data.data.project)
+        })
+    }
     getProject()
-  }, [props])
+  }, [id])
 
   return (
     <div className='new'>
