@@ -8,11 +8,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 const EditProfile = (props) => {
 
   const initialState = {
-    name: "",
-    category: "",
-    link: "",
-    description: "",
-    client: ""
+    first: "",
+    middle: "",
+    last: "",
+    email: "",
+    linkedin: "",
+    github: "",
   };
 
   const { id } = useParams()
@@ -65,7 +66,7 @@ const EditProfile = (props) => {
             <form onSubmit={updateProfile}>
                 <div className="formInput">
                   <label>Input First Name</label>
-                  <input 
+                  <input
                   name="first"
                   onChange={handleChange}
                   value={profile.first}
@@ -73,7 +74,7 @@ const EditProfile = (props) => {
                 </div>
                 <div className="formInput">
                   <label>Input Middle Name</label>
-                  <input 
+                  <input
                   name="middle"
                   onChange={handleChange}
                   value={profile.middle}
@@ -84,12 +85,12 @@ const EditProfile = (props) => {
                   <input
                   name="last"
                   onChange={handleChange}
-                  value={profile.last} 
+                  value={profile.last}
                   type="text" placeholder="Please input last name" />
                 </div>
                 <div className="formInput">
                   <label>Input Email</label>
-                  <input 
+                  <input
                   name="email"
                   onChange={handleChange}
                   value={profile.email}
@@ -97,7 +98,7 @@ const EditProfile = (props) => {
                 </div>
                 <div className="formInput">
                   <label>Input Linkedin Link</label>
-                  <input 
+                  <input
                   name="linkedin"
                   onChange={handleChange}
                   value={profile.linkedin}
@@ -105,7 +106,7 @@ const EditProfile = (props) => {
                 </div>
                 <div className="formInput">
                   <label>Input Github Link</label>
-                  <input 
+                  <input
                   name="github"
                   onChange={handleChange}
                   value={profile.github}

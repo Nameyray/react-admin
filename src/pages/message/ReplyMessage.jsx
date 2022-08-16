@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import './new.scss'
+import Axios from "axios"
+import { useNavigate, useParams } from 'react-router-dom';
 
-const ReplyMessage = () => {
+const ReplyMessage = (props) => {
+
+  const initialState = {
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  };
+
+  const { id } = useParams()
+  // const navigate = useNavigate()
+
+  const [message, setMessage] = useState(initialState)
+
+  const getMessage = () => {
+    Axios.get(`/messages/get-message/${id}`)
+      .then(res => {
+        setMessage(res.data.data.profile)
+      })
+  }
+
+  function handleChange(e) {
+    setMessage({ ...message, [e.target.name]: e.target.value });
+  }
+
+  useEffect(() => {
+    getMessage()
+  }, [props])
+
   return (
     <div className='new'>
       <Sidebar />
@@ -16,7 +46,11 @@ const ReplyMessage = () => {
           <div className="right">
             <form>
                 <div className="formInput">
-                  <input disabled  type="text" placeholder="name" />
+                  <input
+                  name="name"
+                  onChange={handleChange}
+                  value={message.name}
+                    disabled  type="text" placeholder="name" />
                 </div>
                 <div className="formInput">
                   <input disabled  type="text" placeholder="email" />

@@ -15,7 +15,7 @@ const CreateProfile = () => {
   const [github, setGithub] = useState("")
 
   const createProfile = async(e) => {
- 
+
     e.preventDefault()
 
     Axios.post("/profiles/create-profile", {first, middle, last, email, linkedin, github})
@@ -35,7 +35,7 @@ const CreateProfile = () => {
             <form onSubmit={createProfile}>
                 <div className="formInput">
                   <label>Input First Name</label>
-                  <input 
+                  <input
                     onChange={(e) => setFirst(e.target.value)}
                     value={first}
                     type="text" placeholder="Please input first name" />
@@ -49,28 +49,28 @@ const CreateProfile = () => {
                 </div>
                 <div className="formInput">
                   <label>Input Last Name</label>
-                  <input 
+                  <input
                   onChange={(e) => setlast(e.target.value)}
                   value={last}
                   type="text" placeholder="Please input last name" />
                 </div>
                 <div className="formInput">
                   <label>Input Email</label>
-                  <input 
+                  <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email" placeholder="Please input email" />
                 </div>
                 <div className="formInput">
                   <label>Input Linkedin Link</label>
-                  <input 
+                  <input
                   onChange={(e) => setLinkedin(e.target.value)}
                   value={linkedin}
                   type="text" placeholder="Please input linkedin link" />
                 </div>
                 <div className="formInput">
                   <label>Input Github Link</label>
-                  <input 
+                  <input
                   onChange={(e) => setGithub(e.target.value)}
                   value={github}
                   type="text" placeholder="Please input github link" />
